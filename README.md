@@ -69,8 +69,8 @@ All datasets are loaded into a single SQLite database.
 
 | File                            | Purpose                                                   |
 |---------------------------------|-----------------------------------------------------------|
-| `Ingestion.ipynb`              | Loads CSVs into SQLite with logging and error handling    |
-| `EDA.ipynb`                    | Cleans and explores data using Pandas and SQL            |
+| `Ingest_db.ipynb`              | Loads CSVs into SQLite with logging and error handling    |
+| `EDA.ipynb`                    | Cleans and explores data using Pandas and SQL             |
 | `Vendor Performance.ipynb`     | Analyzes vendor/brand-level performance                   |
 | `inventory.db`                 | Final database used for querying and analysis             |
 | `final_table.csv`              | Merged and cleaned data used in Power BI                  |
