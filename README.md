@@ -1,6 +1,6 @@
 # Vendor-Performance-Analysis
 
-![Workflow](Workflow.png)
+<img width="1803" height="1004" alt="Workflow" src="https://github.com/user-attachments/assets/b9f95e9e-361d-454d-aa7e-99a9017cf3c8" />
 
 ---
 
@@ -70,12 +70,12 @@ All datasets are loaded into a single SQLite database.
 | File                            | Purpose                                                   |
 |---------------------------------|-----------------------------------------------------------|
 | `Ingestion.ipynb`              | Loads CSVs into SQLite with logging and error handling    |
-| `Exploratory Data Analysis.ipynb` | Cleans and explores data using Pandas and SQL            |
+| `EDA.ipynb`                    | Cleans and explores data using Pandas and SQL            |
 | `Vendor Performance.ipynb`     | Analyzes vendor/brand-level performance                   |
 | `inventory.db`                 | Final database used for querying and analysis             |
 | `final_table.csv`              | Merged and cleaned data used in Power BI                  |
 | `Workflow.png`                 | Project flow diagram                                      |
-| `Dashboard.gif`                | Preview of interactive Power BI dashboard                 |
+| `Dashboard.jpg`                | Preview of interactive Power BI dashboard                 |
 
 ---
 
@@ -125,7 +125,7 @@ merged.to_csv('final_table.csv', index=False)
 
 ## Dashboard Preview
 
-![Uploading Screenshot 2025-09-03 224924.png…]()
+<img width="1403" height="790" alt="Screenshot 2025-09-03 224924" src="https://github.com/user-attachments/assets/843ee841-089a-4624-821f-af85fa3d27b4" />
 
 Interactive Power BI dashboard covering sales, purchases, margins, vendor health, and more.
 
