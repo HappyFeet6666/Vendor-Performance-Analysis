@@ -5,7 +5,6 @@
 > An end-to-end data analytics project uncovering vendor and brand profitability insights for retail & wholesale businesses.  
 > Built with **Python, SQL (SQLite), and Power BI**.
 
-<img width="1803" height="1004" alt="Workflow" src="https://github.com/user-attachments/assets/b9f95e9e-361d-454d-aa7e-99a9017cf3c8" />
 
 ---
 
@@ -136,7 +135,17 @@ Insights:
 
 1. Clone this repo  
 
-   ```bash
+   '''bash
    git clone https://github.com/username/Vendor-Performance-Analysis
    cd Vendor-Performance-Analysis
+   
+   pip install -r requirements.txt
+   
+2. Run Jupyter notebooks in order:
+ - ingest_db.ipynb
+ - EDA.ipynb
+ - Vendor Performance Analysis.ipynb
+
+3. Export final dataset: final_table.csv
+4. Open Power BI → Connect to final_table.csv → Explore dashboard
 
