@@ -1,160 +1,142 @@
-# Vendor-Performance-Analysis
+---
+
+# Vendor Performance Analysis
+
+> An end-to-end data analytics project uncovering vendor and brand profitability insights for retail & wholesale businesses.  
+> Built with **Python, SQL (SQLite), and Power BI**.
 
 <img width="1803" height="1004" alt="Workflow" src="https://github.com/user-attachments/assets/b9f95e9e-361d-454d-aa7e-99a9017cf3c8" />
 
 ---
 
-## Problem Statement
+## Business Problem
 
-This project analyzes vendor performance for a wholesale/retail business. The goal is to find which vendors and brands are profitable, where pricing or inventory issues are hurting the business, and how to fix them using data.
+Retail & wholesale companies often face:
 
----
+* High capital locked in slow-moving or stuck inventory  
+* Inefficient vendor pricing and dependency risks  
+* Difficulty identifying profitable vs. underperforming vendors  
 
-## What This Project Does
-
-- Identifies top-performing and underperforming vendors
-- Highlights slow-moving or stuck inventory
-- Detects pricing inconsistencies
-- Analyzes how bulk purchases affect margins
-- Answers core business questions with clear data
+**Goal:** Optimize vendor relationships, improve margins, and reduce holding costs through **data-driven insights**.
 
 ---
 
-## Project Highlights
+## Objectives
 
-- Identify top-performing and underperforming vendors
-- Highlight stuck or slow-moving inventory
-- Spot pricing mismatches
-- Understand how bulk purchases impact margins
-- Answer actual business questions through clean, structured analysis
-
----
-
-## Why This Matters
-
-Businesses constantly ask:
-- Which vendors are boosting profits — and which are draining them?
-- Where are we losing money — in pricing, inventory, or buying decisions?
-- How can we optimize vendor relationships?
-
-This project tackles those questions head-on using data and dashboards.
+* Identify **top-performing vendors** and **underperforming brands**  
+* Highlight **stuck inventory** tying up capital  
+* Detect **pricing mismatches** and margin leakages  
+* Analyze **bulk purchase impact** on unit costs  
+* Provide actionable insights via an **interactive dashboard**
 
 ---
 
-## How It Works
+## Workflow
 
-1. **Ingest Data**  
-   Load CSVs into SQLite using Python. Handles large files and logs each step.
-2. **Clean + Analyze**  
-   Use SQL and Pandas to explore, join, and clean the data.
-3. **Generate Insights**  
-   Calculate KPIs like margins, sales, stuck inventory, and vendor-level performance.
-4. **Visualize**  
-   Build a Power BI dashboard that’s easy to read and ready for business users.
+1. **Data Ingestion** → Load CSVs into SQLite using Python (with logging & error handling)  
+2. **EDA & Cleaning** → Explore, validate, and clean data using Pandas + SQL  
+3. **Analysis** → Compute vendor KPIs (sales, margin, turnover, stuck inventory)  
+4. **Visualization** → Build an executive-friendly Power BI dashboard  
 
 ---
 
-## What’s in the Data?
+## Project Structure
 
-- Opening and closing inventory
-- Vendor purchases and pricing
-- Product-level sales data
-- Vendor invoice details
-
-All datasets are loaded into a single SQLite database.
-
----
-
-## Key Files
-
-| File                            | Purpose                                                   |
-|---------------------------------|-----------------------------------------------------------|
-| `Ingest_db.ipynb`              | Loads CSVs into SQLite with logging and error handling    |
-| `EDA.ipynb`                    | Cleans and explores data using Pandas and SQL             |
-| `Vendor Performance Analysis.ipynb`     | Analyzes vendor/brand-level performance                   |
-| `inventory.db`                 | Final database used for querying and analysis             |
-| `vendor sales summary.csv`              | Merged and cleaned data used in Power BI                  |
-| `Workflow.png`                 | Project flow diagram                                      |
-| `Dashboard.jpg`                | Preview of interactive Power BI dashboard                 |
-
----
-
-## Example Code Snippets
-
-**Data Ingestion**
-```python
-import pandas as pd
-import sqlite3
-
-conn = sqlite3.connect('inventory.db')
-df = pd.read_csv('data/sales.csv')
-df.to_sql('sales', conn, if_exists='replace', index=False)
-```
-
-**Cleaning & Merging**
-```python
-df_sales = pd.read_sql('SELECT * FROM sales', conn)
-df_purchases = pd.read_sql('SELECT * FROM purchases', conn)
-merged = pd.merge(df_sales, df_purchases, on='product_id', how='left')
-merged = merged.dropna()
-merged['date'] = pd.to_datetime(merged['date'])
-```
-
-**Analysis**
-```python
-vendor_sales = merged.groupby('vendor_name')['sales_amount'].sum().reset_index()
-top_vendors = vendor_sales.sort_values(by='sales_amount', ascending=False).head(5)
-```
-
-**Export for Power BI**
-```python
-merged.to_csv('final_table.csv', index=False)
-```
-
----
-
-## Skills Demonstrated
-
-- SQL (joins, filtering, grouping)
-- Python scripting (with logging, chunking, error handling)
-- Data wrangling with Pandas
-- Power BI for dashboarding
-- Breaking down real business problems into data workflows
+| File/Folder                         | Purpose                                                     |
+| ----------------------------------- | ----------------------------------------------------------- |
+| `ingest_db.ipynb`                   | Ingests CSVs into SQLite with logging & error handling      |
+| `EDA.ipynb`                         | Data exploration, validation, and creation of summary table |
+| `Vendor Performance Analysis.ipynb` | Vendor/brand-level KPI analysis                             |
+| `inventory.db`                      | Final SQLite database                                       |
+| `final_table.csv`                   | Clean dataset exported for Power BI                         |
+| `Workflow.png`                      | Project flow diagram                                        |
+| `Dashboard.jpg`                     | Dashboard preview (Power BI)                                |
 
 ---
 
 ## Dashboard Preview
 
-<img width="1403" height="790" alt="Screenshot 2025-09-03 224924" src="https://github.com/user-attachments/assets/843ee841-089a-4624-821f-af85fa3d27b4" />
+<img width="1403" height="790" alt="Dashboard" src="https://github.com/user-attachments/assets/843ee841-089a-4624-821f-af85fa3d27b4" />
 
-Interactive Power BI dashboard covering sales, purchases, margins, vendor health, and more.
+Key features:
+
+* KPI Cards: Total Sales, Purchases, Gross Profit, Profit Margin  
+* Top Vendors & Brands Leaderboard  
+* Underperforming Vendors & Brands flagged  
+* Scatter: **Sales vs. Profit Margin** (brand health check)  
+* Inventory aging and stuck capital overview  
+
+---
+
+## Business Questions Answered
+
+* Which vendors contribute most to revenue & profit?  
+* Which vendors underperform and need reevaluation?  
+* How much capital is stuck in unsold inventory?  
+* What are the average margins by brand & vendor?  
+* Do bulk purchases actually reduce unit cost?  
+* Which brands require promotions or price adjustments?  
+
+---
+
+## Key Insights & Metrics
+
+| Metric               | Value     |
+| -------------------- | --------- |
+| **Total Sales**      | \$441.41M |
+| **Total Purchases**  | \$307.34M |
+| **Gross Profit**     | \$134.07M |
+| **Profit Margin**    | 38.72%    |
+| **Unsold Inventory** | \$2.71M   |
+
+Insights:
+
+* Vendor sales & GP highly concentrated: top 10 vendors drive majority of profit  
+* Several vendors (<1% contribution) consume resources but add little value  
+* Brands with <15% margin flagged for promotion or renegotiation  
+* \$2.7M locked in stuck inventory → clearance recommended  
+
+---
+
+## Methodology
+
+1. **Data Sources**: Sales, Purchases, Inventory, Vendor Invoices  
+2. **Ingestion**: Load into SQLite with logging & chunking for large files  
+3. **Cleaning**: Handle missing values, unify formats, reconcile totals  
+4. **Analysis**:  
+   * Vendor Contribution = Sales & GP share  
+   * Gross Margin % = (Revenue − COGS) / Revenue  
+   * Inventory Turnover & DOH  
+   * Bulk Purchase Elasticity (unit cost vs. quantity)  
+5. **Visualization**: Power BI dashboard for executives  
+
+---
+
+## Tools & Skills Demonstrated
+
+* **Python**: pandas, numpy, matplotlib, seaborn  
+* **SQL**: Joins, aggregations, performance queries in SQLite  
+* **Power BI**: Dashboarding, KPI cards, drill-through  
+* **Statistics**: Confidence intervals, margin distributions, outlier detection  
+* **Data Engineering**: Logging, error handling, reproducible pipeline  
+
+---
+
+## Low Performers Detected
+
+* **Vendors (<1% Sales Contribution)**:  
+  Dunn Wine Brokers, Circa Wines, Park Street Imports, Highland Wine Merchants, Alisa Carr Beverages  
+
+* **Low-Margin Brands (<15%)**:  
+  Flagged via **Sales vs. Profit Margin scatterplot**, segmented by `TargetBrand` classification  
 
 ---
 
 ## How to Run
 
-1. Clone the repo  
+1. Clone this repo  
+
    ```bash
-   git clone https://github.com/eharshit/End-to-End-Vendor-Insights
-   ```
-2. Install dependencies  
-   ```bash
-   pip install pandas numpy
-   ```
-3. Launch Jupyter Notebook  
-   ```bash
-   jupyter notebook
-   ```
-4. Run the notebooks in this order:
-   - `Ingestion.ipynb`
-   - `Exploratory Data Analysis.ipynb`
-   - `Vendor Performance.ipynb` (optional deep dive)
-5. Open Power BI and connect to `final_table.csv`
+   git clone https://github.com/username/Vendor-Performance-Analysis
+   cd Vendor-Performance-Analysis
 
----
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you want to improve.
-
----
